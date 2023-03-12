@@ -1,12 +1,23 @@
 import Die from './components/Die';
 
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { nanoid } from 'nanoid';
 
 export default function App() {
     const [dice, setDice] = useState(allNewDice());
+    const [tenzies, setTenzies] = useState(false);
+
+    useEffect(() => {
+        const allHeld = dice.every((die) => die.isHeld);
+        const firstValue = dice[0].value;
+        const allSameValue = dice.every((die) => die.value === firstValue);
+        if (allHeld && allSameValue) {
+            setTenzies(true);
+            console.log('You Won');
+        }
+    }, [dice]);
 
     //we added below function in order to aviod being repetitive in rollDice function
     function generateNewDie() {
@@ -59,7 +70,7 @@ export default function App() {
             </p>
             <div className="dice-container">{diceElements}</div>
             <button className="roll-dice-btn" onClick={rollDice}>
-                Roll
+                {tenzies ? 'New Game' : 'Roll'}
             </button>
         </main>
     );
