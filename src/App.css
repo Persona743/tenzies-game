@@ -9,6 +9,12 @@ body {
     font-family: 'Karla', sans-serif;
 }
 
+.tenzies-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
 main {
     background-color: #F5F5F5;
     height: 400px;
